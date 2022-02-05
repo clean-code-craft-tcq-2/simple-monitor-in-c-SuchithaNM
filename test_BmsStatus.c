@@ -1,4 +1,4 @@
-#include "test_BmsStaus.h"
+#include "test_BmsStatus.h"
 #include "Bms.h"
 
 void testBatteryStatusOk(float soc ,float temp , float chargeRate)
