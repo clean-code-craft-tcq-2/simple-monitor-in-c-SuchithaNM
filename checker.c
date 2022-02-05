@@ -2,12 +2,12 @@
 #include <assert.h>
 #include "Bms.h"
 
-int batteryIsOk(float (*fptemperature)(float), float (*fpsoc)(float), float (*fpchargeRate)(float))
+int batteryIsOk(float (*fpInttBatteryGetSoc)(float), float (*fpInttBatteryGetTemp)(float), float (*fpInttBatteryGetChargeRate)(float))
 {	
-	fpsoc = fpInttBatteryGetSoc();
-	fptemperature = fpInttBatteryGetTemp();
-	fpchargeRate = fpInttBatteryGetChargeRate();
-	return (fpsoc && fptemperature && fpchargeRate);
+	float soc = fpInttBatteryGetSoc();
+	float temperature = fpInttBatteryGetTemp();
+	float chargeRate = fpInttBatteryGetChargeRate();
+	return (soc && temperature && chargeRate);
 }
 
 
