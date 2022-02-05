@@ -1,9 +1,10 @@
+#include <stdio.h>
 #include "Bms.h"
 
 
 float InttBatteryGetSoc(float totalChargeInput , float soc )
 {
-	float soc = totalChargeInput / MAX_CAPACITY_BATTERY;
+	soc = totalChargeInput / MAX_CAPACITY_BATTERY;
 	if (soc >= MIN_STATEOFCHARGE || soc <= MAX_STATEOFCHARGE)
 	{
 		printf("SOC of Battery is in charging state\n");
