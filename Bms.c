@@ -4,12 +4,6 @@
 float (*fpInttBatterygetSoc)(float totalChargeInput)
 {
 	float soc = totalChargeInput / MAX_CAPACITY_BATTERY;
-	return soc;
-}
-
-float InttBatterygetSoc(float soc)
-{
-	soc = fpInttBatterygetSoc;
 	if (soc >= MIN_STATEOFCHARGE || soc <= MAX_STATEOFCHARGE)
 	{
 		printf("SOC of Battery is in charging state\n");
