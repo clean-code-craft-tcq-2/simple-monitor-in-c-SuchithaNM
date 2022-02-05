@@ -3,7 +3,7 @@
 #include "Bms.h"
 #include "test_BmsStatus.h"
 
-int batteryIsOk(float (*fptemperature)(float), float (*fpsoc)(float), float (*fpchargeRate)(float)
+int batteryIsOk(float (*fptemperature)(float), float (*fpsoc)(float), float (*fpchargeRate)(float))
 {	
 	fpsoc = fpInttBatterygetSoc;
 	fptemperature = IntBatterygetTemp();
