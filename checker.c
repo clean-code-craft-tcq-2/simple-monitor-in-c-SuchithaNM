@@ -2,7 +2,7 @@
 #include <assert.h>
 #include "Bms.h"
 
-int batteryIsOk(float (*fpInttBatteryGetSoc)(float), float (*fpInttBatteryGetTemp)(float), float (*fpInttBatteryGetChargeRate)(float))
+int batteryIsOk(float (*fpInttBatteryGetSoc)(void), float (*fpInttBatteryGetTemp)(void), float (*fpInttBatteryGetChargeRate)(void))
 {	
 	float soc = fpInttBatteryGetSoc();
 	float temperature = fpInttBatteryGetTemp();
@@ -14,6 +14,6 @@ int batteryIsOk(float (*fpInttBatteryGetSoc)(float), float (*fpInttBatteryGetTem
 int main()
 {
 	//testBatteryStatus_env();
-	assert(batteryIsOk(25, 70, 0.7));
-        assert(!batteryIsOk(50, 85, 0)); 
+	assert(batteryIsOk(&InttBatteryGetSoc, &InttBatteryGetTemp, &InttBatteryGetChargeRate));
+        assert(!batteryIsOk(&InttBatteryGetSoc, &InttBatteryGetTemp, &InttBatteryGetChargeRate)); 
 }
