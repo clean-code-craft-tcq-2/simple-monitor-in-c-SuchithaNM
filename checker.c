@@ -4,7 +4,7 @@
 
 int batteryIsOk(float (*fptemperature)(float), float (*fpsoc)(float), float (*fpchargeRate)(float))
 {	
-	fpsoc = fpInttBatterygetSoc;
+	fpsoc = fpInttBatterygetSoc();
 	fptemperature = IntBatterygetTemp();
 	fpchargeRate = IntBatterygetChargeRate();
 	return (fpsoc && fptemperature && fpchargeRate);
