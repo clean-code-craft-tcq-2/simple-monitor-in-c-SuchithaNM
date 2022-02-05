@@ -1,7 +1,7 @@
 #include "Bms.h"
 
 
-float (*fpInttBatteryGetSoc)(float totalChargeInput)
+float InttBatteryGetSoc(float totalChargeInput , float soc )
 {
 	float soc = totalChargeInput / MAX_CAPACITY_BATTERY;
 	if (soc >= MIN_STATEOFCHARGE || soc <= MAX_STATEOFCHARGE)
@@ -16,7 +16,7 @@ float (*fpInttBatteryGetSoc)(float totalChargeInput)
 	}
 }
 
-float (*fpInttBatteryGetTemp)(float temp)
+float InttBatteryGetTemp(float temp)
 {
 	if(temp >= MIN_TEMPERATURE || temp <=  MAX_TEMPERATURE)
 	{
@@ -29,7 +29,7 @@ float (*fpInttBatteryGetTemp)(float temp)
 		return 0;
 	}		
 }
-float (*fpInttBatteryGetChargeRate)(float chargeRate)
+float InttBatteryGetChargeRate(float chargeRate)
 {
 	if(chargeRate >= MIN_CHARGERATE || chargeRate <=  MAX_CHARGERATE)
 	{
