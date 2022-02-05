@@ -13,5 +13,6 @@ extern float InttBatteryGetSoc(float totalChargeInput, float soc);
 extern float InttBatteryGetTemp(float temp);
 extern float InttBatteryGetChargeRate(float chargeRate);
 extern int batteryIsOk(float soc , float totalChargeInput, float temp , float chargeRate, float (*fpInttBatteryGetSoc)(float,float), float (*fpInttBatteryGetTemp)(float), float (*fpInttBatteryGetChargeRate)(float));
+extern void testBatteryStatus_env(void);
 
 #endif
