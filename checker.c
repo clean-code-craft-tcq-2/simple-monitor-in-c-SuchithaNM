@@ -1,26 +1,19 @@
 #include <stdio.h>
 #include <assert.h>
 #include "Bms.h"
-#include "test_BmsStatus.h"
 
 int batteryIsOk(float (*fptemperature)(float), float (*fpsoc)(float), float (*fpchargeRate)(float))
 {	
-	fpsoc = fpInttBatterygetSoc();
-	fptemperature = fpInttBatteryTemp();
-	fpchargeRate = fpInttBatteryChargeRate();
-	
-  if(fptemperature == 0 || fpsoc == 0 || fpchargeRate == 0 ) 
-  {
-	return 0;
-  }
-  else
-  {
-	 return 1;
-  }
+	fpsoc = fpInttBatterygetSoc;
+	fptemperature = IntBatterygetTemp();
+	fpchargeRate = IntBatterygetChargeRate();
+	return (fpsoc && fptemperature && fpchargeRate);
 }
 
 
 int main()
 {
-	testBatteryStatus_env();
+	//testBatteryStatus_env();
+	assert(batteryIsOk(25, 70, 0.7));
+        assert(!batteryIsOk(50, 85, 0)); 
 }
