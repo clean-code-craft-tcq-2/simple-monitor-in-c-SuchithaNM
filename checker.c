@@ -1,21 +1,28 @@
 #include <stdio.h>
 #include <assert.h>
+#include "Bmc.h"
+#include "test_BmsStatus.h"
 
-int batteryIsOk(float temperature, float soc, float chargeRate) {
-  if(temperature < 0 || temperature > 45) {
-    printf("Temperature out of range!\n");
-    return 0;
-  } else if(soc < 20 || soc > 80) {
-    printf("State of Charge out of range!\n");
-    return 0;
-  } else if(chargeRate > 0.8) {
-    printf("Charge Rate out of range!\n");
-    return 0;
+
+
+int batteryIsOk(float (*fptemperature)(float), float (*fpsoc)(float), float (*fpchargeRate)(float)
+{	
+	fpsoc = fpInttBatterygetSoc;
+	fptemperature = IntBatterygetTemp();
+	fpchargeRate = IntBatterygetChargeRate();
+	
+  if(fptemperature == 0 || fpsoc == 0 || fpchargeRate == 0 ) 
+  {
+	return 0;
   }
-  return 1;
+  else
+  {
+	 return 1;
+  }
 }
 
-int main() {
-  assert(batteryIsOk(25, 70, 0.7));
-  assert(!batteryIsOk(50, 85, 0));
+
+int main()
+{
+	testBatteryStatus_env();
 }
