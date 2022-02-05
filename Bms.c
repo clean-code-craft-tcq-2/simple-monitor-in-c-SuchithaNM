@@ -3,7 +3,8 @@
 
 float (*fpInttBatterygetSoc)(float totalChargeInput)
 {
-	 return (totalChargeInput / MAX_CAPACITY_BATTERY);
+	float soc = totalChargeInput / MAX_CAPACITY_BATTERY;
+	return soc;
 }
 
 float InttBatterygetSoc(float soc)
