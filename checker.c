@@ -1,9 +1,7 @@
 #include <stdio.h>
 #include <assert.h>
-#include "Bmc.h"
+#include "Bms.h"
 #include "test_BmsStatus.h"
-
-
 
 int batteryIsOk(float (*fptemperature)(float), float (*fpsoc)(float), float (*fpchargeRate)(float)
 {	
