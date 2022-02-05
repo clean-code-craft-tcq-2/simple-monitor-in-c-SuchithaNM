@@ -1,5 +1,11 @@
 #include "Bms.h"
 
+
+float (*fpInttBatterygetSoc)(float totalChargeInput)
+{
+	 return (totalChargeInput / MAX_CAPACITY_BATTERY);
+}
+
 float InttBatterygetSoc(float soc)
 {
 	soc = fpInttBatterygetSoc;
@@ -13,11 +19,6 @@ float InttBatterygetSoc(float soc)
 		printf("SOC of Battery is in discharging state\n");
 		return 0; 
 	}
-}
-
-float (*fpInttBatterygetSoc)(float totalChargeInput)
-{
-	 return (totalChargeInput / MAX_CAPACITY_BATTERY);
 }
 
 float (*fpInttBatteryTemp)(float temp)
