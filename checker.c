@@ -7,14 +7,20 @@ int batteryIsOk(float soc , float totalChargeInput, float temp , float chargeRat
 	float stateOfCharge = fpInttBatteryGetSoc(soc,totalChargeInput);
 	float temperature = fpInttBatteryGetTemp(temp);
 	float chargerate = fpInttBatteryGetChargeRate(chargeRate);
-	return (stateOfCharge && temperature && chargerate);
+	if(stateOfCharge == 1 && temperature == 1 && chargerate == 1)
+	{
+		return 1;
+	}
 }
 int batteryIsNotOk(float soc , float totalChargeInput, float temp , float chargeRate, float (*fpInttBatteryGetSoc)(float,float), float (*fpInttBatteryGetTemp)(float), float (*fpInttBatteryGetChargeRate)(float))
 {	
 	float stateOfCharge = fpInttBatteryGetSoc(soc,totalChargeInput);
 	float temperature = fpInttBatteryGetTemp(temp);
 	float chargerate = fpInttBatteryGetChargeRate(chargeRate);
-	return (stateOfCharge || temperature || chargerate);
+	if(stateOfCharge == 0 || temperature == 0 || chargerate == 0)
+	{
+		return 0;
+	}
 }
 void testBatteryStatus_env()
 {
