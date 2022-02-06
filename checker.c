@@ -16,10 +16,25 @@ int batteryIsNotOk(float soc , float totalChargeInput, float temp , float charge
 	float chargerate = fpInttBatteryGetChargeRate(chargeRate);
 	return (stateOfCharge || temperature || chargerate);
 }
-void testBatteryStatus_env()
+/*void testBatteryStatus_env()
 {
 	assert(batteryIsOk(32,8,40,0.7,&InttBatteryGetSoc, &InttBatteryGetTemp, &InttBatteryGetChargeRate));
         assert(batteryIsNotOk(88,22,50,0.9,&InttBatteryGetSoc, &InttBatteryGetTemp, &InttBatteryGetChargeRate)); 
+}*/
+int test_batteryIsOk(float expectedSoc , float expectedTotalChargeInput, float expectedTemp , float expectedChargeRate)
+{	
+	batteryIsOk(expectedSoc,expectedTotalChargeInput,expectedTemp,expectedChargeRate,&InttBatteryGetSoc, &InttBatteryGetTemp, &InttBatteryGetChargeRate);
+	assert()
+}
+int test_batteryIsNotOk(float expectedSoc , float expectedTotalChargeInput, float expectedTemp , float expectedChargeRate)
+{	
+	batteryIsNotOk(expectedSoc,expectedTotalChargeInput,expectedTemp,expectedChargeRate,&InttBatteryGetSoc, &InttBatteryGetTemp, &InttBatteryGetChargeRate);
+}
+
+void testBatteryStatus_env()
+{
+	assert(test_batteryIsOk(32,8,40,0.7));
+    	assert(test_batteryIsNotOk(88,22,50,0.9)); 
 }
 
 int main()
