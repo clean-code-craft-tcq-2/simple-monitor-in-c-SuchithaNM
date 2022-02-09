@@ -2,44 +2,44 @@
 #include "Bms.h"
 
 
-float InttBatteryGetSoc(float totalChargeInput , float soc )
+float inttBatterySocCheck(float totalChargeInput , float soc )
 {
 	soc = (totalChargeInput / MAX_CAPACITY_BATTERY) * 100;
 	if ((soc >= MIN_STATEOFCHARGE) || (soc <= MAX_STATEOFCHARGE))
 	{
-		printf("SOC of Battery is in charging state\n");
+		/*SOC of Battery is in charging state*/
 		return 1; 
 	}
 	else
 	{
-		printf("SOC of Battery is in discharging state\n");
+		/*SOC of Battery is in discharging state*/
 		return 0; 
 	}
 }
 
-float InttBatteryGetTemp(float temp)
+float inttBatteryTempCheck(float temp)
 {
 	if((temp >= MIN_TEMPERATURE) || (temp <=  MAX_TEMPERATURE))
 	{
-		printf("Charge the Battery and Temperature is in range\n");
+		/*Charge the Battery and Temperature is in range*/
 		return 1;
 	}
 	else
 	{
-		printf("DisCharge the Battery and Temperature is out of range\n");
+		/*DisCharge the Battery and Temperature is out of range*/
 		return 0;
 	}		
 }
-float InttBatteryGetChargeRate(float chargeRate)
+float inttBatteryChargeRateCheck(float chargeRate)
 {
 	if((chargeRate >= MIN_CHARGERATE) || (chargeRate <=  MAX_CHARGERATE))
 	{
-		printf("Charge  rate of battery is in range\n");
+		/*Charge  rate of battery is in range*/
 		return 1;
 	}
 	else
 	{
-		printf("Charge  rate of battery is out of range\n");
+		/*Charge  rate of battery is out of range*/
 		return 0;
 	}		
 }
