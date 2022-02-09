@@ -9,11 +9,11 @@
 #define MIN_CHARGERATE 0.2
 #define MAX_CHARGERATE 0.8
 
-extern float inttBatterySocCheck(float totalChargeInput, float soc);
-extern float inttBatteryTempCheck(float temp);
-extern float inttBatteryChargeRateCheck(float chargeRate);
-extern int batteryIsOk(float soc , float totalChargeInput, float temp , float chargeRate, float (*fpInttBatterySocCheck)(float,float), float (*fpInttBatteryTempCheck)(float), float (*fpInttBatteryChargeRateCheck)(float));
-extern int batteryIsNotOk(float soc , float totalChargeInput, float temp , float chargeRate, float (*fpInttBatterySocCheck)(float,float), float (*fpInttBatteryTempCheck)(float), float (*fpInttBatteryChargeRateCheck)(float));
+extern float inttBatterySocIsOk(float totalChargeInput, float soc);
+extern float inttBatteryTempIsOk(float temp);
+extern float inttBatteryChargeRateIsOk(float chargeRate);
+extern int batteryIsOk(float soc , float totalChargeInput, float temp , float chargeRate, float (*fpInttBatterySocIsOk)(float,float), float (*fpInttBatteryTempIsOk)(float), float (*fpInttBatteryChargeRateIsOk)(float));
+extern int batteryIsNotOk(float soc , float totalChargeInput, float temp , float chargeRate, float (*fpInttBatterySocIsOk)(float,float), float (*fpInttBatteryTempIsOk)(float), float (*fpInttBatteryChargeRateIsOk)(float));
 
 
 #endif
