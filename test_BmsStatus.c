@@ -3,11 +3,11 @@
 
 int test_batteryIsOk(float expectedSoc , float expectedTotalChargeInput, float expectedTemp , float expectedChargeRate)
 {	
-	batteryIsOk(expectedSoc,expectedTotalChargeInput,expectedTemp,expectedChargeRate,&InttBatteryGetSoc, &InttBatteryGetTemp, &InttBatteryGetChargeRate);
+	batteryIsOk(expectedSoc,expectedTotalChargeInput,expectedTemp,expectedChargeRate,&inttBatterySocCheck, &inttBatteryTempCheck, &inttBatteryChargeRateCheck);
 }
 int test_batteryIsNotOk(float expectedSoc , float expectedTotalChargeInput, float expectedTemp , float expectedChargeRate)
 {	
-	batteryIsNotOk(expectedSoc,expectedTotalChargeInput,expectedTemp,expectedChargeRate,&InttBatteryGetSoc, &InttBatteryGetTemp, &InttBatteryGetChargeRate);
+	batteryIsNotOk(expectedSoc,expectedTotalChargeInput,expectedTemp,expectedChargeRate,&inttBatterySocCheck, &inttBatteryTempCheck, &inttBatteryChargeRateCheck);
 }
 
 void testBatteryStatus_env()
