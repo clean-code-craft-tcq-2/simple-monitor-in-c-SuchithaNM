@@ -2,7 +2,7 @@
 #include "Bms.h"
 
 
-float inttBatterySocCheck(float totalChargeInput , float soc )
+float inttBatterySocIsOk(float totalChargeInput , float soc )
 {
 	soc = (totalChargeInput / MAX_CAPACITY_BATTERY) * 100;
 	if ((soc >= MIN_STATEOFCHARGE) || (soc <= MAX_STATEOFCHARGE))
@@ -17,7 +17,7 @@ float inttBatterySocCheck(float totalChargeInput , float soc )
 	}
 }
 
-float inttBatteryTempCheck(float temp)
+float inttBatteryTempIsOk(float temp)
 {
 	if((temp >= MIN_TEMPERATURE) || (temp <=  MAX_TEMPERATURE))
 	{
@@ -30,7 +30,7 @@ float inttBatteryTempCheck(float temp)
 		return 0;
 	}		
 }
-float inttBatteryChargeRateCheck(float chargeRate)
+float inttBatteryChargeRateIsOk(float chargeRate)
 {
 	if((chargeRate >= MIN_CHARGERATE) || (chargeRate <=  MAX_CHARGERATE))
 	{
@@ -43,18 +43,18 @@ float inttBatteryChargeRateCheck(float chargeRate)
 		return 0;
 	}		
 }
-int batteryIsOk(float soc , float totalChargeInput, float temp , float chargeRate, float (*fpInttBatterySocCheck)(float,float), float (*fpInttBatteryTempCheck)(float), float (*fpInttBatteryChargeRateCheck)(float))
+int batteryIsOk(float soc , float totalChargeInput, float temp , float chargeRate, float (*fpInttBatterySocIsOk)(float,float), float (*fpInttBatteryTempIsOk)(float), float (*fpInttBatteryChargeRateIsOk)(float))
 {	
-	float stateOfCharge = fpInttBatterySocCheck(soc,totalChargeInput);
-	float temperature = fpInttBatteryTempCheck(temp);
-	float chargerate = fpInttBatteryChargeRateCheck(chargeRate);
+	float stateOfCharge = fpInttBatterySocIsOk(soc,totalChargeInput);
+	float temperature = fpInttBatteryTempIsOk(temp);
+	float chargerate = fpInttBatteryChargeRateIsOk(chargeRate);
 	return (stateOfCharge && temperature && chargerate);
 }
-int batteryIsNotOk(float soc , float totalChargeInput, float temp , float chargeRate, float (*fpInttBatterySocCheck)(float,float), float (*fpInttBatteryTempCheck)(float), float (*fpInttBatteryChargeRateCheck)(float))
+int batteryIsNotOk(float soc , float totalChargeInput, float temp , float chargeRate, float (*fpInttBatterySocIsOk)(float,float), float (*fpInttBatteryTempIsOk)(float), float (*fpInttBatteryChargeRateIsOk)(float))
 {	
-	float stateOfCharge = fpInttBatterySocCheck(soc,totalChargeInput);
-	float temperature = fpInttBatteryTempCheck(temp);
-	float chargerate = fpInttBatteryChargeRateCheck(chargeRate);
+	float stateOfCharge = fpInttBatterySocIsOk(soc,totalChargeInput);
+	float temperature = fpInttBatteryTempIsOk(temp);
+	float chargerate = fpInttBatteryChargeRateIsOk(chargeRate);
 	return (stateOfCharge || temperature || chargerate);
 }
 
