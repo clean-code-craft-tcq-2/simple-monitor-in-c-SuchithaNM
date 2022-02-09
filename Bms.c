@@ -43,18 +43,18 @@ float inttBatteryChargeRateCheck(float chargeRate)
 		return 0;
 	}		
 }
-int batteryIsOk(float soc , float totalChargeInput, float temp , float chargeRate, float (*fpInttBatteryGetSoc)(float,float), float (*fpInttBatteryGetTemp)(float), float (*fpInttBatteryGetChargeRate)(float))
+int batteryIsOk(float soc , float totalChargeInput, float temp , float chargeRate, float (*fpInttBatterySocCheck)(float,float), float (*fpInttBatteryTempCheck)(float), float (*fpInttBatteryChargeRateCheck)(float))
 {	
-	float stateOfCharge = fpInttBatteryGetSoc(soc,totalChargeInput);
-	float temperature = fpInttBatteryGetTemp(temp);
-	float chargerate = fpInttBatteryGetChargeRate(chargeRate);
+	float stateOfCharge = fpInttBatterySocCheck(soc,totalChargeInput);
+	float temperature = fpInttBatteryTempCheck(temp);
+	float chargerate = fpInttBatteryChargeRateCheck(chargeRate);
 	return (stateOfCharge && temperature && chargerate);
 }
-int batteryIsNotOk(float soc , float totalChargeInput, float temp , float chargeRate, float (*fpInttBatteryGetSoc)(float,float), float (*fpInttBatteryGetTemp)(float), float (*fpInttBatteryGetChargeRate)(float))
+int batteryIsNotOk(float soc , float totalChargeInput, float temp , float chargeRate, float (*fpInttBatterySocCheck)(float,float), float (*fpInttBatteryTempCheck)(float), float (*fpInttBatteryChargeRateCheck)(float))
 {	
-	float stateOfCharge = fpInttBatteryGetSoc(soc,totalChargeInput);
-	float temperature = fpInttBatteryGetTemp(temp);
-	float chargerate = fpInttBatteryGetChargeRate(chargeRate);
+	float stateOfCharge = fpInttBatterySocCheck(soc,totalChargeInput);
+	float temperature = fpInttBatteryTempCheck(temp);
+	float chargerate = fpInttBatteryChargeRateCheck(chargeRate);
 	return (stateOfCharge || temperature || chargerate);
 }
 
