@@ -11,9 +11,9 @@
 
 extern float inttBatterySocCheck(float totalChargeInput, float soc);
 extern float inttBatteryTempCheck(float temp);
-extern float inttBatteryGetChargeRate(float chargeRate);
-extern int batteryIsOk(float soc , float totalChargeInput, float temp , float chargeRate, float (*fpInttBatteryGetSoc)(float,float), float (*fpInttBatteryGetTemp)(float), float (*fpInttBatteryGetChargeRate)(float));
-extern int batteryIsNotOk(float soc , float totalChargeInput, float temp , float chargeRate, float (*fpInttBatteryGetSoc)(float,float), float (*fpInttBatteryGetTemp)(float), float (*fpInttBatteryGetChargeRate)(float));
+extern float inttBatteryChargeRateCheck(float chargeRate);
+extern int batteryIsOk(float soc , float totalChargeInput, float temp , float chargeRate, float (*fpInttBatterySocCheck)(float,float), float (*fpInttBatteryTempCheck)(float), float (*fpInttBatteryChargeRateCheck)(float));
+extern int batteryIsNotOk(float soc , float totalChargeInput, float temp , float chargeRate, float (*fpInttBatterySocCheck)(float,float), float (*fpInttBatteryTempCheck)(float), float (*fpInttBatteryChargeRateCheck)(float));
 
 
 #endif
