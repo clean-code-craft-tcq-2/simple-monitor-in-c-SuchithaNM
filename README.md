@@ -61,7 +61,7 @@ Shorten the Semantic distance
 ## Extensions
 
 Following two of extensions applied in mycode
-# Extension 1: Early Warning
+### Extension 1: Early Warning
 
 Customers need early warnings to take action, in addition to the alarm that you print after the limit is breached. Introduce a 'warning' level with a tolerance of 5% of the upper-limit.
 
@@ -74,7 +74,7 @@ Same for Temperature and Charge-rate.
 
 Keep in mind: Though we are starting with warning levels for all parameters, customers may give feedback to have warnings only for some parameters and not others. Minimize the change needed for such 'tuning'.
 
-# Extension 3: Accept input in different units
+### Extension 3: Accept input in different units
 
 Some sensors report the temperature in Fahrenheit. Make provision to express the unit along with the measurement. Avoid repeating the limits in different units.
 
