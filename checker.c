@@ -1,79 +1,194 @@
 #include <stdio.h>
-#include <assert.h>
 #include "Bms.h"
-#include "test_BmsStaus.h"
 
-BMS_INB_State_en IntBattState ;
+int IntBatteryCharging_u8 ;
 
-int main()
-{
-	switch(IntBattState) 
+
+
+/****************soc*****************************************/
+int intBattSocLowLimit(float soc)
+{	
+	if ((soc >= MIN_LOWSOCBREACH) || (soc < MIN_LOWSOCWARNING))
 	{
-		case LOW_SOC_BREACH : 
+		/*SOC of Battery is in charging state*/
 		IntBattChargControl(BattChargENABLE_en);
-		break;
-		
-		case LOW_SOC_WARNING : 
-			IntBattChargControl(BattChargENABLE_en);
-	        break;
-		
-		case NORMAL_SOC :
-			IntBattChargControl(BattChargENABLE_en);
-		break;
-		
-		case HIGH_SOC_WARNING :
-		IntBattChargControl(BattChargDISABLE_en);
-		break;
-		
-		case HIGH_SOC_BREACH : 
-		IntBattChargControl(BattChargDISABLE_en);
-		break;
-		
-		case LOW_TEMP_BREACH : 
-		IntBattChargControl(BattChargENABLE_en);
-		break;
-		
-		case LOW_TEMP_WARNING :
-			IntBattChargControl(BattChargENABLE_en);
-		break;
-		
-		case NORMAL_TEMP : 
-			IntBattChargControl(BattChargENABLE_en);
-		break;
-		
-		case HIGH_TEMP_WARNING : 
-			IntBattChargControl(BattChargDISABLE_en);
-		break;
-		
-		case HIGH_TEMP_BREACH : 
-		IntBattChargControl(BattChargDISABLE_en);
-		break;
-		
-		case LOW_CHARGERATE_BREACH :
-		IntBattChargControl(BattChargENABLE_en);
-		break;
-		
-		case LOW_CHARGERATE_WARNING :
-			IntBattChargControl(BattChargENABLE_en);
-		break;
-		
-		case NORMAL_CHARGERATE : 
-			IntBattChargControl(BattChargENABLE_en);
-		break;
-		
-		case HIGH_CHARGERATE_WARNING : 
-		IntBattChargControl(BattChargDISABLE_en);
-		break;
-		
-		case HIGH_CHARGERATE_BREACH :
-			IntBattChargControl(BattChargDISABLE_en);	
-		break;
-		
-		default :
-			/*Do nothing*/
-		break;
+		return E_NOT_OK; 
 	}
+	else if ((soc >= MIN_LOWSOCWARNING) || (soc <= MIN_SOCNORMAL))
+	{
+		/*SOC of Battery is in charging state*/
+		IntBattChargControl(BattChargENABLE_en);
+		printf("Warning: SOC Approaching discharge\n");
+		return E_NOT_OK; 
+	}
+	else
+	{
+		/*SOC of Battery is in charging state*/
+		return E_OK; 
+	}
+}
 
-	testBatteryStatus_env();
+int intBattSocHighLimit(float soc)
+{
+	if ((soc >= MIN_HIGHSOCWARNING) || (soc <= MIN_HIGHSOCBREACH))
+	{
+		/*SOC of Battery is in charging state*/
+		IntBattChargControl(BattChargDISABLE_en);
+		printf("Warning: SOC Approaching charge-peak\n");
+		return E_NOT_OK; 
+	}
+	else 
+	{
+		
+		/*SOC of Battery is in discharging state*/
+		IntBattChargControl(BattChargDISABLE_en);
+		return E_NOT_OK; 
+	}
+	IntBattChargControl(BattChargENABLE_en);
+	
+}
+
+int inttBatterySocIsOk(float soc )
+{
+	int socStatus = E_OK;
+	if(soc >= MIN_LOWSOCBREACH && soc <= MIN_HIGHSOCWARNING)
+	{
+		socStatus = intBattSocLowLimit(soc);
+	}
+	else
+	{
+		socStatus = intBattSocHighLimit(soc);
+	}
+	return socStatus;
+}
+
+/****************TEMP*****************************************/
+int intBattTempLowLimit(float temp)
+{	
+	if ((temp >= MIN_LOWTEMPBREACH) || (temp < MIN_LOWTEMPWARNING))
+	{
+		/*SOC of Battery is in charging state*/
+		IntBattChargControl(BattChargENABLE_en);
+		return E_NOT_OK; 
+	}
+	else if ((temp >= MIN_LOWTEMPWARNING) || (temp <= MIN_TEMPNORMAL))
+	{
+		/*SOC of Battery is in charging state*/
+		IntBattChargControl(BattChargENABLE_en);
+		printf("Warning:  temp Approaching discharge\n");
+		return E_NOT_OK; 
+	}
+	else
+	{
+		/*SOC of Battery is in charging state*/
+		return E_OK; 
+	}
+}
+
+int intBattTempHighLimit(float temp)
+{
+	if ((temp >= MIN_HIGHTEMPWARNING) || (temp <= MIN_HIGHTEMPBREACH))
+	{
+		/*SOC of Battery is in charging state*/
+		printf("Warning: temp Approaching charge-peak\n");
+		IntBattChargControl(BattChargDISABLE_en);
+		return E_NOT_OK; 
+	}
+	else 
+	{
+		/*SOC of Battery is in discharging state*/
+		IntBattChargControl(BattChargDISABLE_en);
+		return E_NOT_OK; 
+	}
+	
+}
+
+int inttBatteryTempIsOk(float temp )
+{
+	int tempStatus = E_OK;
+	if(temp >= MIN_LOWTEMPBREACH && temp < MIN_HIGHTEMPWARNING)
+	{
+		tempStatus = intBattTempLowLimit(temp);
+	}
+	else
+	{
+		tempStatus = intBattTempHighLimit(temp);
+	}
+	return tempStatus;
+}
+
+/****************ChargeRate*****************************************/
+int intBattChargeRateLowLimit(float chargeRate)
+{	
+	if ((chargeRate >= MIN_LOWCHARGERATEBREACH) || (chargeRate < MIN_LOWCHARGERATEWARNING))
+	{
+		/*SOC of Battery is in charging state*/
+		IntBattChargControl(BattChargENABLE_en);
+		return E_NOT_OK; 
+	}
+	else if ((chargeRate >= MIN_LOWCHARGERATEWARNING) || (chargeRate <= MIN_CHARGERATENORMAL))
+	{
+		/*SOC of Battery is in charging state*/
+		IntBattChargControl(BattChargENABLE_en);
+		printf("Warning:  CR Approaching discharge\n");
+		return E_NOT_OK; 
+	}
+	else
+	{
+		/*SOC of Battery is in charging state*/
+		return E_OK; 
+	}
+}
+
+int intBattChargeRateHighLimit(float chargeRate)
+{
+	if ((chargeRate >= MIN_HIGHCHARGERATEWARNING) || (chargeRate <= MIN_HIGHCHARGERATEBREACH))
+	{
+		/*SOC of Battery is in charging state*/
+		IntBattChargControl(BattChargDISABLE_en);
+		printf("Warning: CR Approaching charge-peak\n");
+		return E_NOT_OK; 
+	}
+	else 
+	{
+		/*SOC of Battery is in discharging state*/
+		IntBattChargControl(BattChargDISABLE_en);
+		return E_NOT_OK; 
+	}
+	
+}
+
+int inttBatteryChargeRateIsOk(float chargeRate )
+{
+	int chargeRateStatus = E_OK;
+	if(chargeRate >= MIN_LOWCHARGERATEBREACH && chargeRate < MIN_HIGHCHARGERATEWARNING)
+	{
+		chargeRateStatus = intBattChargeRateLowLimit(chargeRate);
+	}
+	else
+	{
+		chargeRateStatus = intBattChargeRateHighLimit(chargeRate);
+	}
+	return chargeRateStatus;
+}
+
+int batteryIsOk( float soc, float temp , float chargeRate)
+{	
+	float stateOfCharge = inttBatterySocIsOk(soc);
+	float temperature = inttBatteryTempIsOk(temp);
+	float chargerate = inttBatteryChargeRateIsOk(chargeRate);
+	return (stateOfCharge && temperature && chargerate);
+}
+int batteryIsNotOk(float soc, float temp , float chargeRate)
+{	
+	float stateOfCharge = inttBatterySocIsOk(soc);
+	float temperature = inttBatteryTempIsOk(temp);
+	float chargerate = inttBatteryChargeRateIsOk(chargeRate);
+	return (stateOfCharge && temperature && chargerate);
+}
+
+void IntBattChargControl(IntBattChargControl_type ChargeCntrl)
+{
+   IntBatteryCharging_u8 = (int)ChargeCntrl;
 }
 
