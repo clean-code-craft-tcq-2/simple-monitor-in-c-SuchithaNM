@@ -1,6 +1,6 @@
 #ifndef BMS_H
 #define BMS_H
-
+#include <stdbool.h>
 #define MAX_CAPACITY_BATTERY 25
 
 
@@ -25,33 +25,12 @@
 #define MIN_HIGHCHARGERATEBREACH  0.8
 #define MAX_HIGHCHARGERATEBREACH  1.0
 
+#define TEMP_UNIT_CELCIUS         'C'
+#define TEMP_UNIT_FARENHEIT       'F'
 
-#define E_OK     0
-#define E_NOT_OK 1
+#define E_OK                       0
+#define E_NOT_OK                   1
 
-/*
-typedef struct
-{
-	float lowerLimitBreach;
-	float lowerLimitWarning;
-	float Normal;
-	float higherLimitWarning;
-	float higherLimitBreach;
-}BatteryStatus_tn;*/
-
-
-
- /*   0 to 20: LOW_SOC_BREACH minSOCbre max
-    21 to 24: LOW_SOC_WARNING min soc war max
-    24 to 75: NORMAL
-    76 to 80: HIGH_SOC_WARNING
-    81 to 100: HIGH_SOC_BREACH
-
-typedef struct {
-    BMS_INB_State_en         PrevState_en;
-    BMS_INB_State_en         CurrentState_en;
-}BMS_RamVarType;
-*/
 
 typedef enum
 {
@@ -65,15 +44,16 @@ extern int intBattSocLowLimit(float soc);
 extern int intBattSocHighLimit(float soc);
 extern int inttBatterySocIsOk(float soc );
 extern int intBattTempLowLimit(float temp);
-extern int intBattTempHighLimit(float temp);
-extern int inttBatteryTempIsOk(float temp );
+extern int intBattTempHighLimit(float temp , char tempUnit);
+extern int inttBatteryTempIsOk(float temp , char tempUnit );
 extern int intBattChargeRateLowLimit(float chargeRate);
 extern int intBattChargeRateHighLimit(float chargeRate);
 extern int inttBatteryChargeRateIsOk(float chargeRate );
+extern bool inttBattTempUnit(char cel);
+extern float inttBattConvertTemp(float temp, char tempUnit);
 
-
-extern int batteryIsOk( float soc, float temp , float chargeRate);
-extern int batteryIsNotOk( float soc, float temp , float chargeRate);
+extern int batteryIsOk( float soc, float temp , float chargeRate, char tempUnit);
+extern int batteryIsNotOk( float soc, float temp , float chargeRate,char tempUnit);
 
 extern void IntBattChargControl(IntBattChargControl_type ChargeCntrl);
 extern void bmsMainFunction(void);
