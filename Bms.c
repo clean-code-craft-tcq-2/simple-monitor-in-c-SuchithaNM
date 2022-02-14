@@ -10,12 +10,12 @@ int intBattSocLowLimit(float soc)
 {	
 	if ((soc >= MIN_LOWSOCBREACH) || (soc < MIN_LOWSOCWARNING))
 	{
-		IntBattChargControl(BattChargENABLE_en);
+		//IntBattChargControl(BattChargENABLE_en);
 		return E_NOT_OK; 
 	}
 	else if ((soc >= MIN_LOWSOCWARNING) || (soc <= MIN_SOCNORMAL))
 	{
-		IntBattChargControl(BattChargENABLE_en);
+		//IntBattChargControl(BattChargENABLE_en);
 		return E_NOT_OK; 
 	}
 	else
@@ -37,7 +37,6 @@ int intBattSocHighLimit(float soc)
 		IntBattChargControl(BattChargDISABLE_en);
 		return E_NOT_OK; 
 	}
-	IntBattChargControl(BattChargENABLE_en);
 	
 }
 
@@ -60,12 +59,12 @@ int intBattTempLowLimit(float temp)
 {	
 	if ((temp >= MIN_LOWTEMPBREACH) || (temp < MIN_LOWTEMPWARNING))
 	{
-		IntBattChargControl(BattChargENABLE_en);
+		//IntBattChargControl(BattChargENABLE_en);
 		return E_NOT_OK; 
 	}
 	else if ((temp >= MIN_LOWTEMPWARNING) || (temp <= MIN_TEMPNORMAL))
 	{
-		IntBattChargControl(BattChargENABLE_en);
+		//IntBattChargControl(BattChargENABLE_en);
 		return E_NOT_OK; 
 	}
 	else
@@ -108,12 +107,12 @@ int intBattChargeRateLowLimit(float chargeRate)
 {	
 	if ((chargeRate >= MIN_LOWCHARGERATEBREACH) || (chargeRate < MIN_LOWCHARGERATEWARNING))
 	{
-		IntBattChargControl(BattChargENABLE_en);
+		//IntBattChargControl(BattChargENABLE_en);
 		return E_NOT_OK; 
 	}
 	else if ((chargeRate >= MIN_LOWCHARGERATEWARNING) || (chargeRate <= MIN_CHARGERATENORMAL))
 	{
-		IntBattChargControl(BattChargENABLE_en);
+		//IntBattChargControl(BattChargENABLE_en);
 		return E_NOT_OK; 
 	}
 	else
