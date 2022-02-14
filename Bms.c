@@ -29,12 +29,12 @@ int intBattSocHighLimit(float soc)
 {
 	if ((soc >= MIN_HIGHSOCWARNING) || (soc <= MIN_HIGHSOCBREACH))
 	{
-		IntBattChargControl(BattChargDISABLE_en);
+	//	IntBattChargControl(BattChargDISABLE_en);
 		return E_NOT_OK; 
 	}
 	else 
 	{
-		IntBattChargControl(BattChargDISABLE_en);
+	//	IntBattChargControl(BattChargDISABLE_en);
 		return E_NOT_OK; 
 	}
 	
@@ -77,12 +77,12 @@ int intBattTempHighLimit(float temp)
 {
 	if ((temp >= MIN_HIGHTEMPWARNING) || (temp <= MIN_HIGHTEMPBREACH))
 	{
-		IntBattChargControl(BattChargDISABLE_en);
+	//	IntBattChargControl(BattChargDISABLE_en);
 		return E_NOT_OK; 
 	}
 	else 
 	{
-		IntBattChargControl(BattChargDISABLE_en);
+	//	IntBattChargControl(BattChargDISABLE_en);
 		return E_NOT_OK; 
 	}
 	
@@ -125,12 +125,12 @@ int intBattChargeRateHighLimit(float chargeRate)
 {
 	if ((chargeRate >= MIN_HIGHCHARGERATEWARNING) || (chargeRate <= MIN_HIGHCHARGERATEBREACH))
 	{
-		IntBattChargControl(BattChargDISABLE_en);
+	//	IntBattChargControl(BattChargDISABLE_en);
 		return E_NOT_OK; 
 	}
 	else 
 	{
-		IntBattChargControl(BattChargDISABLE_en);
+	//	IntBattChargControl(BattChargDISABLE_en);
 		return E_NOT_OK; 
 	}
 	
@@ -165,8 +165,9 @@ int batteryIsNotOk(float soc, float temp , float chargeRate)
 	return (stateOfCharge && temperature && chargerate);
 }
 
+/*
 void IntBattChargControl(IntBattChargControl_type ChargeCntrl)
 {
    IntBatteryCharging_u8 = (int)ChargeCntrl;
-}
+}*/
 
