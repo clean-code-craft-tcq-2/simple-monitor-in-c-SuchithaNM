@@ -8,14 +8,9 @@ int IntBatteryCharging_u8 ;
 /****************soc*****************************************/
 int intBattSocLowLimit(float soc)
 {	
-	if ((soc >= MIN_LOWSOCBREACH) || (soc < MIN_LOWSOCWARNING))
+	if ((soc >= MIN_LOWSOCBREACH) || (soc <= MIN_SOCNORMAL))
 	{
-		//IntBattChargControl(BattChargENABLE_en);
-		return E_NOT_OK; 
-	}
-	else if ((soc >= MIN_LOWSOCWARNING) || (soc <= MIN_SOCNORMAL))
-	{
-		//IntBattChargControl(BattChargENABLE_en);
+		IntBattChargControl(BattChargENABLE_en);
 		return E_NOT_OK; 
 	}
 	else
@@ -29,12 +24,12 @@ int intBattSocHighLimit(float soc)
 {
 	if ((soc >= MIN_HIGHSOCWARNING) || (soc <= MIN_HIGHSOCBREACH))
 	{
-	//	IntBattChargControl(BattChargDISABLE_en);
+		IntBattChargControl(BattChargDISABLE_en);
 		return E_NOT_OK; 
 	}
 	else 
 	{
-	//	IntBattChargControl(BattChargDISABLE_en);
+		IntBattChargControl(BattChargDISABLE_en);
 		return E_NOT_OK; 
 	}
 	
@@ -43,7 +38,7 @@ int intBattSocHighLimit(float soc)
 int inttBatterySocIsOk(float soc )
 {
 	int socStatus = E_OK;
-	if(soc >= MIN_LOWSOCBREACH && soc <= MIN_HIGHSOCWARNING)
+	if((soc >= MIN_LOWSOCBREACH) && (soc <= MIN_HIGHSOCWARNING))
 	{
 		socStatus = intBattSocLowLimit(soc);
 	}
@@ -57,14 +52,9 @@ int inttBatterySocIsOk(float soc )
 /****************TEMP*****************************************/
 int intBattTempLowLimit(float temp)
 {	
-	if ((temp >= MIN_LOWTEMPBREACH) || (temp < MIN_LOWTEMPWARNING))
+	if ((temp >= MIN_LOWTEMPBREACH) || (temp < =MIN_TEMPNORMAL))
 	{
-		//IntBattChargControl(BattChargENABLE_en);
-		return E_NOT_OK; 
-	}
-	else if ((temp >= MIN_LOWTEMPWARNING) || (temp <= MIN_TEMPNORMAL))
-	{
-		//IntBattChargControl(BattChargENABLE_en);
+		IntBattChargControl(BattChargENABLE_en);
 		return E_NOT_OK; 
 	}
 	else
@@ -77,12 +67,12 @@ int intBattTempHighLimit(float temp)
 {
 	if ((temp >= MIN_HIGHTEMPWARNING) || (temp <= MIN_HIGHTEMPBREACH))
 	{
-	//	IntBattChargControl(BattChargDISABLE_en);
+		IntBattChargControl(BattChargDISABLE_en);
 		return E_NOT_OK; 
 	}
 	else 
 	{
-	//	IntBattChargControl(BattChargDISABLE_en);
+		IntBattChargControl(BattChargDISABLE_en);
 		return E_NOT_OK; 
 	}
 	
@@ -105,14 +95,9 @@ int inttBatteryTempIsOk(float temp )
 /****************ChargeRate*****************************************/
 int intBattChargeRateLowLimit(float chargeRate)
 {	
-	if ((chargeRate >= MIN_LOWCHARGERATEBREACH) || (chargeRate < MIN_LOWCHARGERATEWARNING))
+	if ((chargeRate >= MIN_LOWCHARGERATEBREACH) || (chargeRate <= MIN_CHARGERATENORMAL))
 	{
-		//IntBattChargControl(BattChargENABLE_en);
-		return E_NOT_OK; 
-	}
-	else if ((chargeRate >= MIN_LOWCHARGERATEWARNING) || (chargeRate <= MIN_CHARGERATENORMAL))
-	{
-		//IntBattChargControl(BattChargENABLE_en);
+		IntBattChargControl(BattChargENABLE_en);
 		return E_NOT_OK; 
 	}
 	else
@@ -125,12 +110,12 @@ int intBattChargeRateHighLimit(float chargeRate)
 {
 	if ((chargeRate >= MIN_HIGHCHARGERATEWARNING) || (chargeRate <= MIN_HIGHCHARGERATEBREACH))
 	{
-	//	IntBattChargControl(BattChargDISABLE_en);
+		IntBattChargControl(BattChargDISABLE_en);
 		return E_NOT_OK; 
 	}
 	else 
 	{
-	//	IntBattChargControl(BattChargDISABLE_en);
+		IntBattChargControl(BattChargDISABLE_en);
 		return E_NOT_OK; 
 	}
 	
@@ -162,12 +147,12 @@ int batteryIsNotOk(float soc, float temp , float chargeRate)
 	float stateOfCharge = inttBatterySocIsOk(soc);
 	float temperature = inttBatteryTempIsOk(temp);
 	float chargerate = inttBatteryChargeRateIsOk(chargeRate);
-	return (stateOfCharge && temperature && chargerate);
+	return (stateOfCharge || temperature || chargerate);
 }
 
-/*
+
 void IntBattChargControl(IntBattChargControl_type ChargeCntrl)
 {
    IntBatteryCharging_u8 = (int)ChargeCntrl;
-}*/
+}
 
