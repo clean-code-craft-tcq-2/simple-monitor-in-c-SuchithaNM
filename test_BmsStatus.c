@@ -1,17 +1,17 @@
 #include "test_BmsStaus.h"
+#include <stdio.h>
 
-
-int test_batteryIsOk(float expectedSoc , float expectedTotalChargeInput, float expectedTemp , float expectedChargeRate)
+int test_batteryIsOk(float expectedTotalChargeInput, float expectedTemp , float expectedChargeRate)
 {	
-	batteryIsOk(expectedSoc,expectedTotalChargeInput,expectedTemp,expectedChargeRate,&inttBatterySocIsOk, &inttBatteryTempIsOk, &inttBatteryChargeRateIsOk);
+	batteryIsOk(expectedTotalChargeInput,expectedTemp,expectedChargeRate,&inttBatterySocIsOk, &inttBatteryTempIsOk, &inttBatteryChargeRateIsOk);
 }
-int test_batteryIsNotOk(float expectedSoc , float expectedTotalChargeInput, float expectedTemp , float expectedChargeRate)
+int test_batteryIsNotOk(float expectedTotalChargeInput, float expectedTemp , float expectedChargeRate)
 {	
-	batteryIsNotOk(expectedSoc,expectedTotalChargeInput,expectedTemp,expectedChargeRate,&inttBatterySocIsOk, &inttBatteryTempIsOk, &inttBatteryChargeRateIsOk);
+	batteryIsNotOk(expectedTotalChargeInput,expectedTemp,expectedChargeRate,&inttBatterySocIsOk, &inttBatteryTempIsOk, &inttBatteryChargeRateIsOk);
 }
 
-void testBatteryStatus_env()
+void testBatteryStatus_env(void)
 {
-	assert(test_batteryIsOk(32,8,40,0.7));
-  assert(test_batteryIsNotOk(88,22,50,0.9)); 
+	assert(test_batteryIsOk(32,40,0.7));
+  	assert(test_batteryIsNotOk(88,50,0.9)); 
 }
