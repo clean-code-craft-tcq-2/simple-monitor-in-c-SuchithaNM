@@ -63,7 +63,7 @@ int intBattTempLowLimit(float temp)
 	}
 }
 
-int intBattTempHighLimit(float temp)
+int intBattTempHighLimit(float temp, char tempUnit)
 {
 	if ((temp >= MIN_HIGHTEMPWARNING) || (temp <= MIN_HIGHTEMPBREACH))
 	{
@@ -73,12 +73,13 @@ int intBattTempHighLimit(float temp)
 	else 
 	{
 		IntBattChargControl(BattChargDISABLE_en);
+		inttBattConvertTemp(temp, tempUnit);
 		return E_NOT_OK; 
 	}
 	
 }
 
-int inttBatteryTempIsOk(float temp )
+int inttBatteryTempIsOk(float temp, char tempUnit )
 {
 	int tempStatus = E_OK;
 	if((temp >= MIN_LOWTEMPBREACH) && (temp < MIN_HIGHTEMPWARNING))
@@ -87,11 +88,31 @@ int inttBatteryTempIsOk(float temp )
 	}
 	else
 	{
-		tempStatus = intBattTempHighLimit(temp);
+		tempStatus = intBattTempHighLimit(temp, tempUnit);
 	}
 	return tempStatus;
 }
 
+ bool inttBattTempUnit(char cel)
+ {
+ 	if(cel == TEMP_UNIT_CELCIUS)
+		return true;
+	 else
+		return false;
+ }
+
+float inttBattConvertTemp(float temp, char tempUnit)
+{
+	float celcius;
+	if((temp > MAX_HIGHTEMPBREACH) && (tempUnit == TEMP_UNIT_FARENHEIT))
+	{
+		celcius = (temp - 32) * 5 / 9;
+	}
+	else
+	{
+		return temp;
+	}
+}
 /****************ChargeRate*****************************************/
 int intBattChargeRateLowLimit(float chargeRate)
 {	
@@ -135,17 +156,17 @@ int inttBatteryChargeRateIsOk(float chargeRate )
 	return chargeRateStatus;
 }
 
-int batteryIsOk( float soc, float temp , float chargeRate)
+int batteryIsOk( float soc, float temp , float chargeRate, char tempUnit )
 {	
 	float stateOfCharge = inttBatterySocIsOk(soc);
-	float temperature = inttBatteryTempIsOk(temp);
+	float temperature = inttBatteryTempIsOk(temp, tempUnit);
 	float chargerate = inttBatteryChargeRateIsOk(chargeRate);
 	return (stateOfCharge && temperature && chargerate);
 }
-int batteryIsNotOk(float soc, float temp , float chargeRate)
+int batteryIsNotOk(float soc, float temp , float chargeRate, char tempUnit)
 {	
 	float stateOfCharge = inttBatterySocIsOk(soc);
-	float temperature = inttBatteryTempIsOk(temp);
+	float temperature = inttBatteryTempIsOk(temp, tempUnit);
 	float chargerate = inttBatteryChargeRateIsOk(chargeRate);
 	return (stateOfCharge || temperature || chargerate);
 }
