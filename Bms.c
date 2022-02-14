@@ -52,7 +52,7 @@ int inttBatterySocIsOk(float soc )
 /****************TEMP*****************************************/
 int intBattTempLowLimit(float temp)
 {	
-	if ((temp >= MIN_LOWTEMPBREACH) || (temp < =MIN_TEMPNORMAL))
+	if ((temp >= MIN_LOWTEMPBREACH) || (temp <= MIN_TEMPNORMAL))
 	{
 		IntBattChargControl(BattChargENABLE_en);
 		return E_NOT_OK; 
@@ -81,7 +81,7 @@ int intBattTempHighLimit(float temp)
 int inttBatteryTempIsOk(float temp )
 {
 	int tempStatus = E_OK;
-	if(temp >= MIN_LOWTEMPBREACH && temp < MIN_HIGHTEMPWARNING)
+	if((temp >= MIN_LOWTEMPBREACH) && (temp < MIN_HIGHTEMPWARNING))
 	{
 		tempStatus = intBattTempLowLimit(temp);
 	}
@@ -124,7 +124,7 @@ int intBattChargeRateHighLimit(float chargeRate)
 int inttBatteryChargeRateIsOk(float chargeRate )
 {
 	int chargeRateStatus = E_OK;
-	if(chargeRate >= MIN_LOWCHARGERATEBREACH && chargeRate < MIN_HIGHCHARGERATEWARNING)
+	if((chargeRate >= MIN_LOWCHARGERATEBREACH) && (chargeRate < MIN_HIGHCHARGERATEWARNING))
 	{
 		chargeRateStatus = intBattChargeRateLowLimit(chargeRate);
 	}
