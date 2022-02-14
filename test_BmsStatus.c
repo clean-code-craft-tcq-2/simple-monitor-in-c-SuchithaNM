@@ -15,5 +15,5 @@ void testBatteryStatus_env(void)
   	assert(test_batteryIsNotOk(88,50,0.9,'C')); 
 	assert(test_batteryIsOk(32,39,0.7,'C'));
 	assert(test_batteryIsOk(42,30,0.6,'C'));
-	assert(test_batteryIsOk(42,283.6,'F));
+	assert(test_batteryIsOk(42,283,0.6,'F'));
 }
