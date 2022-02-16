@@ -32,13 +32,6 @@
 #define E_NOT_OK                   1
 
 
-typedef enum
-{
-    BattChargDISABLE_en = 0,
-    BattChargENABLE_en
-}IntBattChargControl_type;
-
-
 
 extern int intBattSocLowLimit(float soc);
 extern int intBattSocHighLimit(float soc);
@@ -55,7 +48,5 @@ extern float inttBattConvertTemp(float temp, char tempUnit);
 extern int batteryIsOk( float soc, float temp , float chargeRate, char tempUnit);
 extern int batteryIsNotOk( float soc, float temp , float chargeRate,char tempUnit);
 
-extern void IntBattChargControl(IntBattChargControl_type ChargeCntrl);
-extern void bmsMainFunction(void);
 
 #endif
