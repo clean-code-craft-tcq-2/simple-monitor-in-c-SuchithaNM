@@ -1,16 +1,12 @@
 #include <stdio.h>
 #include "Bms.h"
 
-int IntBatteryCharging_u8 ;
-
-
 
 /****************soc*****************************************/
 int intBattSocLowLimit(float soc)
 {	
 	if ((soc >= MIN_LOWSOCBREACH) || (soc <= MIN_SOCNORMAL))
 	{
-		IntBattChargControl(BattChargENABLE_en);
 		return E_NOT_OK; 
 	}
 	else
@@ -24,12 +20,10 @@ int intBattSocHighLimit(float soc)
 {
 	if ((soc >= MIN_HIGHSOCWARNING) || (soc <= MIN_HIGHSOCBREACH))
 	{
-		IntBattChargControl(BattChargDISABLE_en);
 		return E_NOT_OK; 
 	}
 	else 
 	{
-		IntBattChargControl(BattChargDISABLE_en);
 		return E_NOT_OK; 
 	}
 	
@@ -54,7 +48,6 @@ int intBattTempLowLimit(float temp)
 {	
 	if ((temp >= MIN_LOWTEMPBREACH) || (temp <= MIN_TEMPNORMAL))
 	{
-		IntBattChargControl(BattChargENABLE_en);
 		return E_NOT_OK; 
 	}
 	else
@@ -67,12 +60,10 @@ int intBattTempHighLimit(float temp, char tempUnit)
 {
 	if ((temp >= MIN_HIGHTEMPWARNING) || (temp <= MIN_HIGHTEMPBREACH))
 	{
-		IntBattChargControl(BattChargDISABLE_en);
 		return E_NOT_OK; 
 	}
 	else 
 	{
-		IntBattChargControl(BattChargDISABLE_en);
 		inttBattConvertTemp(temp, tempUnit);
 		return E_NOT_OK; 
 	}
@@ -118,7 +109,6 @@ int intBattChargeRateLowLimit(float chargeRate)
 {	
 	if ((chargeRate >= MIN_LOWCHARGERATEBREACH) || (chargeRate <= MIN_CHARGERATENORMAL))
 	{
-		IntBattChargControl(BattChargENABLE_en);
 		return E_NOT_OK; 
 	}
 	else
@@ -131,12 +121,10 @@ int intBattChargeRateHighLimit(float chargeRate)
 {
 	if ((chargeRate >= MIN_HIGHCHARGERATEWARNING) || (chargeRate <= MIN_HIGHCHARGERATEBREACH))
 	{
-		IntBattChargControl(BattChargDISABLE_en);
 		return E_NOT_OK; 
 	}
 	else 
 	{
-		IntBattChargControl(BattChargDISABLE_en);
 		return E_NOT_OK; 
 	}
 	
@@ -169,11 +157,5 @@ int batteryIsNotOk(float soc, float temp , float chargeRate, char tempUnit)
 	float temperature = inttBatteryTempIsOk(temp, tempUnit);
 	float chargerate = inttBatteryChargeRateIsOk(chargeRate);
 	return (stateOfCharge || temperature || chargerate);
-}
-
-
-void IntBattChargControl(IntBattChargControl_type ChargeCntrl)
-{
-   IntBatteryCharging_u8 = (int)ChargeCntrl;
 }
 
